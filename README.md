@@ -72,9 +72,9 @@ npm install
 ## Contributors
 -------------
 
-Xavier Graham
-Brody England
-Dallon Jarman
+- Xavier Graham 
+- Brody England 
+- Dallon Jarman 
 
 ## License
 --------
