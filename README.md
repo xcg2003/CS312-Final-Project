@@ -24,7 +24,7 @@ This is a video streaming web app platform built using Node.js and Express.js. I
 
 To get started with this project, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/video-streaming-app.git`
+1. Clone the repository: `https://github.com/xcg2003/CS312-Final-Project.git`
 2. Install dependencies: `npm install`
 3. Start the server: `node app.js`
 
