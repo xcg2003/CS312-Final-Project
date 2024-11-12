@@ -9,10 +9,9 @@
 2. [Getting Started](#getting-started)
 3. [Features](#features)
 4. [Technical Requirements](#technical-requirements)
-5. [Installation](#installation)
-6. [Usage](#usage)
-7. [Contributing](#contributing)
-8. [License](#license)
+5. [Usage](#usage)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ## Introduction
 ------------
@@ -43,19 +42,12 @@ without buffering or delays.
 
 ### Dependencies
 
+Too lazy for now
 
 
 ### Requirements
 
-
-## Installation
---------------
-
-To install the dependencies, run:
-
-```bash
-npm install
-```
+IDK yet
 
 ## Usage
 --------
@@ -67,7 +59,7 @@ npm install
 
 ### Example Usage
 
-
+Don't care
 
 ## Contributors
 -------------

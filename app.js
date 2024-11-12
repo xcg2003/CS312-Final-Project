@@ -1,17 +1,50 @@
-require("dotenv").config();
+const express = require('express');
+const app = express();
+const User = require('./user');
+const pool = require('./db');
 
-const http = require("http");
-const { neon } = require("@neondatabase/serverless");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const sql = neon(process.env.DATABASE_URL);
+// Set EJS as view engine
+app.set('view engine', 'ejs');
 
-const requestHandler = async (req, res) => {
-  const result = await sql`SELECT version()`;
-  const { version } = result[0];
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end(version);
-};
+// Register route
+app.get('/register', (req, res) => {
+  res.render('register');
+});
 
-http.createServer(requestHandler).listen(3000, () => {
-  console.log("Server running at http://localhost:3000");
+app.post('/register', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const user = await User.register(username, email, password);
+    res.redirect('/login');
+  } catch (err) {
+    res.status(400).render('register', { error: err.message });
+  }
+});
+
+// Login route
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.login(username, password);
+    res.redirect('/dashboard');
+  } catch (err) {
+    res.status(401).render('login', { error: err.message });
+  }
+});
+
+// Dashboard route (after login)
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard');
+});
+
+// Start server
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
 });
