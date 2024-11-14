@@ -1,5 +1,7 @@
-require('dotenv').config();
-const { Pool } = require('pg');
+import dotenv from 'dotenv';
+import pg from 'pg';
+const { Pool } = pg;
+dotenv.config();
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 const pool = new Pool({
   host: PGHOST,
@@ -12,4 +14,4 @@ const pool = new Pool({
   },
 });
 
-module.exports = pool;
+export default pool;

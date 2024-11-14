@@ -1,7 +1,7 @@
-const express = require('express');
+import express from "express"
 const app = express();
-const User = require('./user');
-const pool = require('./db');
+import User from './user.js';
+import pool from './db.js';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

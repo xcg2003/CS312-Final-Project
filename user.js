@@ -1,5 +1,5 @@
-const pool = require('./db');
-const bcrypt = require('bcrypt');
+import pool from './db.js'
+const bcrypt = await import('bcrypt');
 
 class User {
     
@@ -48,4 +48,4 @@ class User {
     }
 }
 
-module.exports = User;
+export default User;
