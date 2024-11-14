@@ -1,4 +1,5 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 const API_KEY = process.env.MOVIE_API_KEY;
 
 // Function to search movie by name
@@ -34,8 +35,6 @@ async function searchMovie(movieName){
 
 }
 
-// https://api.themoviedb.org/3/search/movie?query=blade%20runner&include_adult=false&language=en-US&page=1
-
 // Function to search movie by rating 
 // returns list of movies in order by rating
 
@@ -50,6 +49,6 @@ async function searchMovie(movieName){
 //searchMovie("blade runner");
 let movies = await searchMovie("blade runner");
 console.log(movies.length);
-for( i = 0; i < movies.length; i++ ){
+for( let i = 0; i < movies.length; i++ ){
     console.log(movies.title);
 }
