@@ -46,9 +46,3 @@ async function searchMovie(movieName){
 // Function to search actor
 // Parameters: Actor name
 
-//searchMovie("blade runner");
-let movies = await searchMovie("blade runner");
-console.log(movies.length);
-for( let i = 0; i < movies.length; i++ ){
-    console.log(movies.title);
-}
