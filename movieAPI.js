@@ -93,14 +93,3 @@ async function popularTVShows(){
         console.log(error);
     }
 }
-
-// Function to return movie poster
-// Parameters: movie name
-// returns image url
-// Need to call with await
-
-// Function to search actor
-// Parameters: Actor name
-// Need to call with await
-
-//test
