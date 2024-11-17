@@ -7,7 +7,7 @@ const API_KEY = process.env.MOVIE_API_KEY;
 // Parameters: string to search
 // returns list of search results in json format
 // Need to call with await
-async function searchMovieDatabase(stringToSearch){
+export async function searchMovieDatabase(stringToSearch){
     let responselist = [];
     const query = encodeURIComponent(stringToSearch);
     const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${query}&include_adult=false&language=en-US&page=1`;
@@ -40,7 +40,7 @@ async function searchMovieDatabase(stringToSearch){
 // Function to get popular movies
 // returns list of movies that are popular in the movieDB
 // Need to call with await
-async function popularMovies(){
+export async function popularMovies(){
     let responseList = [];
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
     const options = {
@@ -69,7 +69,7 @@ async function popularMovies(){
 // Function to get popular tv shows
 // returns list of tv shows that are popular in the movieDB
 // Need to call with await
-async function popularTVShows(){
+export async function popularTVShows(){
     let responseList = [];
     const url = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1`;
     const options = {
