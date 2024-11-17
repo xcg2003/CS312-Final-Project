@@ -2,6 +2,10 @@ import express from "express"
 const app = express();
 import User from './user.js';
 import pool from './db.js';
+import cors from 'cors';
+
+app.use(cors());
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -45,6 +49,6 @@ app.get('/dashboard', (req, res) => {
 });
 
 // Start server
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log('Server listening on port 3000');
 });
