@@ -8,7 +8,7 @@ const RegistrationForm = () => {
     });
 
     const handleChange = (e) => {
-        const [name, value] = e.target;
+        const {name, value} = e.target;
         setData({
             ...formData,
             [name]: value,
