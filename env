@@ -1,5 +1,0 @@
-PGHOST='ep-morning-fog-a6pn87a3-pooler.us-west-2.aws.neon.tech'
-PGDATABASE='cs312-final-project'
-PGUSER='cs312-final-project_owner'
-PGPASSWORD='Jytl2bCv1rmU'
-MOVIE_API_KEY='45d426fc7ab4145d994a4855374462e9' 
