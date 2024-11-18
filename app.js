@@ -23,7 +23,11 @@ app.post('/register', async (req, res) => {
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
     console.error('Registration error:', err);
-    res.status(400).json({ error: err.message });
+    if (err.code === '23505') { // PostgreSQL unique violation error code
+      res.status(400).json({ error: 'Email already in use' });
+    } else {
+      res.status(400).json({ error: err.message });
+    }
   }
 });
 
@@ -36,15 +40,15 @@ app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.login(username, password);
-    res.redirect('/dashboard');
+    res.status(200).json({ message: 'Login successful', user });
   } catch (err) {
-    res.status(401).render('login', { error: err.message });
+    res.status(401).json({ error: err.message });
   }
 });
 
 // Dashboard route (after login)
 app.get('/dashboard', (req, res) => {
-  res.send('<h1>Dashboard</h1><p>Hello, World!</p>');
+  res.render('dashboard');
 });
 
 // Start server

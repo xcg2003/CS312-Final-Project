@@ -6,10 +6,11 @@ const Login = () => {
         username: '',
         password: '',
     });
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setData({
             ...formData,
             [name]: value,
@@ -20,31 +21,35 @@ const Login = () => {
         e.preventDefault();
         const options = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json',},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
-        }
+        };
 
         fetch('http://localhost:3000/login', options)
-        .then((response) => {
-            if(!response.ok){
-                throw new Error('Failed to login')
-            }
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Success:', data);
-            alert('Login successful!');
-            navigate('/dashboard');
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('Login failed!');
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then((data) => {
+                        throw new Error(data.error || 'Failed to login');
+                    });
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Success:', data);
+                alert('Login successful!');
+                navigate('/dashboard');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setError(error.message);
+                alert('Login failed!');
+            });
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <h2>Login</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <div>
                 <label>Username:</label>
                 <input
