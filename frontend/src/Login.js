@@ -37,6 +37,7 @@ const Login = () => {
             .then((data) => {
                 console.log('Success:', data);
                 alert('Login successful!');
+                localStorage.setItem('token', data.token);
                 navigate('/dashboard');
             })
             .catch((error) => {

@@ -1,4 +1,5 @@
-import express from "express"
+import express from "express";
+import jwt from "jsonwebtoken";
 const app = express();
 import User from './user.js';
 import cors from 'cors';
@@ -40,14 +41,30 @@ app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.login(username, password);
-    res.status(200).json({ message: 'Login successful', user });
+    const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+    res.status(200).json({ message: 'Login successful', token });
   } catch (err) {
     res.status(401).json({ error: err.message });
   }
 });
 
+// Middleware to verify token
+const verifyToken = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    return res.status(403).json({ error: 'No token provided' });
+  }
+  jwt.verify(token, 'your_jwt_secret', (err, decoded) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to authenticate token' });
+    }
+    req.userId = decoded.id;
+    next();
+  });
+};
+
 // Dashboard route (after login)
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', verifyToken, (req, res) => {
   res.render('dashboard');
 });
 
