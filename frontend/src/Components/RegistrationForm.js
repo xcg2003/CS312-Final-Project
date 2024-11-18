@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
     const [formData, setData] = useState({
@@ -6,6 +7,8 @@ const RegistrationForm = () => {
         email: '',
         password: '',
     });
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -26,16 +29,20 @@ const RegistrationForm = () => {
         fetch('http://localhost:3000/register', options)
         .then((response) => {
             if(!response.ok){
-                throw new Error('Failed to register')
+                return response.json().then((data) => {
+                    throw new Error(data.error || 'Failed to register');
+                });
             }
             return response.json();
         })
         .then((data) => {
             console.log('Success:', data);
             alert('Registration successful!');
+            navigate('/');
         })
         .catch((error) => {
             console.error('Error:', error);
+            setError(error.message);
             alert('Registration failed!');
         });
     };
@@ -43,6 +50,7 @@ const RegistrationForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <h2>Register</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <div>
                 <label>Username:</label>
                 <input

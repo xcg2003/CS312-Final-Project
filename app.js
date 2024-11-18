@@ -18,9 +18,11 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    console.log('Registering user:', { username, email, password });
     const user = await User.register(username, email, password);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
+    console.error('Registration error:', err);
     res.status(400).json({ error: err.message });
   }
 });
@@ -42,7 +44,7 @@ app.post('/login', async (req, res) => {
 
 // Dashboard route (after login)
 app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
+  res.send('<h1>Dashboard</h1><p>Hello, World!</p>');
 });
 
 // Start server
