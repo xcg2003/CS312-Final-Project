@@ -23,7 +23,7 @@ const RegistrationForm = () => {
             body: JSON.stringify(formData),
         }
 
-        fetch('http://localhost:5000', options)
+        fetch('http://localhost:3000/register', options)
         .then((response) => {
             if(!response.ok){
                 throw new Error('Failed to register')
@@ -77,6 +77,5 @@ const RegistrationForm = () => {
         </form>
     );
 };
-
 
 export default RegistrationForm;
