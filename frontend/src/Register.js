@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import RegistrationForm from './Components/RegistrationForm';
 
 function Register() {
@@ -18,6 +19,7 @@ function Register() {
     <div>
       <h1>Welcome to the app test</h1>
       <RegistrationForm />
+      <p>Already have an account? <Link to="/login">Login here</Link></p>
     </div>
   );
 }
