@@ -5,8 +5,6 @@ import pool from './db.js';
 import cors from 'cors';
 
 app.use(cors());
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -22,9 +20,9 @@ app.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const user = await User.register(username, email, password);
-    res.redirect('/login');
+    res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    res.status(400).render('register', { error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
@@ -49,6 +47,6 @@ app.get('/dashboard', (req, res) => {
 });
 
 // Start server
-app.listen(5000, () => {
-  console.log('Server listening on port 5000');
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
 });

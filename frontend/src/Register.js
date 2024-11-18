@@ -5,9 +5,12 @@ function App(){
   const [data, setdata] = useState(null);
 
   useEffect(() => {
-    fetch('https://localhost:5000/register')
-    .then((response) => response.data)
-    .then((data) => setdata(data))
+    fetch('http://localhost:3000/register')
+    .then((response) => response.json())
+    .then((data) => {
+      setdata(data);
+      console.log(data); // Use the data here
+    })
     .catch((error) => console.error('Error: ',error));
       
   }, []);
