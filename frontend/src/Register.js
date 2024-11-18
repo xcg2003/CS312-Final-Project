@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import RegistrationForm from './Components/RegistrationForm';
 
 function App(){
   const [data, setdata] = useState(null);
 
   useEffect(() => {
-    fetch('https://localhost:3000/register')
+    fetch('https://localhost:5000/register')
     .then((response) => response.data)
     .then((data) => setdata(data))
     .catch((error) => console.error('Error: ',error));
@@ -12,7 +13,8 @@ function App(){
   }, []);
   return(
     <div>
-      <h1>TESTING</h1>
+      <h1>Welcome to the app test</h1>
+      <RegistrationForm />
     </div>
   );
 };
