@@ -1,7 +1,6 @@
 import express from "express"
 const app = express();
 import User from './user.js';
-import pool from './db.js';
 import cors from 'cors';
 
 app.use(cors());
