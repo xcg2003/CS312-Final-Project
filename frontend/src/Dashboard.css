@@ -96,3 +96,54 @@ button:hover {
     margin-top: 10px;
     text-align: center;
 }
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.suggestions-list li:hover {
+    background-color: #f0f0f0;
+}
