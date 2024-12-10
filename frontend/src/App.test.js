@@ -152,4 +152,69 @@ describe('App Functionality', () => {
             expect(screen.getByText('Amazing movie!')).toBeInTheDocument();
         });
     });
+
+    test('displays error message on failed login attempt', async () => {
+        global.fetch.mockImplementationOnce(() =>
+            Promise.resolve({
+                ok: false,
+                status: 401,
+                json: () => Promise.resolve({ message: 'Invalid credentials' }),
+            })
+        );
+
+        act(() => {
+            render(
+                <MemoryRouter initialEntries={['/login']}>
+                    <App />
+                </MemoryRouter>
+            );
+        });
+
+        const usernameInput = screen.getByLabelText(/Username/i);
+        const passwordInput = screen.getByLabelText(/Password/i);
+        const loginButton = screen.getByRole('button', { name: /Login/i });
+
+        await userEvent.type(usernameInput, 'wronguser');
+        await userEvent.type(passwordInput, 'wrongpass');
+        await userEvent.click(loginButton);
+
+        await waitFor(() => {
+            expect(screen.getByText(/Invalid credentials/i)).toBeInTheDocument();
+        });
+    });
+
+    test('handles empty movie list gracefully', async () => {
+        global.fetch.mockImplementationOnce(() =>
+            Promise.resolve({
+                ok: true,
+                json: () => Promise.resolve({ movies: [] }),
+            })
+        );
+
+        act(() => {
+            render(
+                <MemoryRouter initialEntries={['/dashboard']}>
+                    <App />
+                </MemoryRouter>
+            );
+        });
+
+        await waitFor(() => {
+            expect(screen.getByText(/No movies available/i)).toBeInTheDocument();
+        });
+    });
+
+    test('redirects to login if token is missing', async () => {
+        act(() => {
+            render(
+                <MemoryRouter initialEntries={['/dashboard']}>
+                    <App />
+                </MemoryRouter>
+            );
+        });
+
+        await waitFor(() => {
+            expect(screen.getByRole('heading', { name: /Login/i })).toBeInTheDocument();
+        });
+    });
 });
